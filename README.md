@@ -6,7 +6,7 @@
 3. Customer selects one consultation package.
 4. **Pay Securely** creates a Razorpay order and opens Razorpay Checkout.
 5. After Razorpay returns a successful payment, `/api/gemstone/verify-payment` verifies the signature server-side.
-6. Only after verified payment, the Freshsales Note is updated with consultation/payment details and the WATI `Gems recomendation` template is sent to the configured business number.
+6. Only after verified payment, the Freshsales Note is updated with consultation/payment details, the Freshsales contact gets the **Astro Paid** tag, the `cf_consultation_amount` field is set to the paid consultation amount, and the WATI `Gems recomendation` template is sent to the configured business number.
 7. The page also prepares a WhatsApp confirmation link containing the payment ID and customer details.
 
 ## Security

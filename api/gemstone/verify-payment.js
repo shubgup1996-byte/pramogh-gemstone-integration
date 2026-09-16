@@ -1,6 +1,6 @@
 const {
   cors, validLead, freshUpdateNote, buildLeadNote,
-  sendWatiTemplate, verifyRazorpaySignature
+  sendWatiTemplate, verifyRazorpaySignature, updatePaidContact
 } = require('../../lib/gemstone');
 
 module.exports = async function handler(req, res) {
@@ -40,6 +40,11 @@ module.exports = async function handler(req, res) {
         paymentId: razorpay_payment_id
       })
     );
+
+    // Payment is verified server-side above. Once verified, mark the
+    // Freshsales contact as paid and store the paid consultation amount.
+    // Existing contact tags are preserved; only "Astro Paid" is appended.
+    await updatePaidContact(contact_id, amount);
 
     let wati = { skipped: true };
     try {
